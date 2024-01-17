@@ -23,7 +23,7 @@ st.set_page_config(layout='wide')
 
 
 ###add all data frames, convert date_date_excel do datetime, split df_fin into rub/usd
-df_fin = pd.read_csv("D:\Python\WebApp\MLC_Finances_Eng_Final_UTF8.csv")
+df_fin = pd.read_csv('https://raw.githubusercontent.com/Unclegeenoo/.streamlit/main/MLC_Finances_Eng_Final_UTF8.csv')
 df_fin['Date'] = pd.to_datetime(df_fin['Date'], format='%d/%m/%Y', errors='coerce')
 
 df_fin_usd = df_fin[df_fin['Classification'].str.contains('USD')]
@@ -31,9 +31,11 @@ df_fin_rub = df_fin[~df_fin['Classification'].str.contains('USD')]
 
 
 
-df_att = pd.read_csv("D:\Python\WebApp\MLC_Attendance_Eng_FInal_UTF8.csv")
+df_att = pd.read_csv('https://raw.githubusercontent.com/Unclegeenoo/.streamlit/main/MLC_Attendance_Eng_FInal_UTF8.csv')
 
-df_forex = pd.read_csv("USD_RUB.csv")
+
+df_forex = pd.read_csv('https://raw.githubusercontent.com/Unclegeenoo/.streamlit/main/USD_RUB.csv')
+
 
 
 df_forex['Date'] = pd.to_datetime(df_forex['Date'])
@@ -809,7 +811,8 @@ def show_financial_analysis():
         fig_fund_forex.update_xaxes(title='Date')
         fig_fund_forex.update_yaxes(title='Fund Cumulative in USD')
 
-        combined_data = pd.read_csv("D:\Python\WebApp\combined_data.csv")
+        combined_data = pd.read_csv('https://raw.githubusercontent.com/Unclegeenoo/.streamlit/main/combined_data.csv')
+        
         combined_data['Date'] = pd.to_datetime(combined_data['Date'])
 
         # Calculate 'Total Fund USD' after filling NaN values
