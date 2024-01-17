@@ -2,7 +2,7 @@ streamlit
 numpy
 pandas
 matplotlib
-plotly==4.14.3
+plotly==5.3.1
 plotly_express
 folium
 
