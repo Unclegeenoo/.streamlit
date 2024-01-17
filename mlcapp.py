@@ -220,6 +220,7 @@ def show_general_stats():
                 border-radius: 10px;
                 padding: 15px;
                 font-weight: bold;
+                margin-bottom: 20px;
             }
         
             .larger-text {
@@ -242,6 +243,7 @@ def show_general_stats():
         .dashboard-column {
             border-radius: 10px;
             padding: 10px;
+            margin-bottom: 20px;
         }
         </style>
         """,
@@ -735,6 +737,7 @@ def show_financial_analysis():
                     background-color: skyblue;
                     border-radius: 10px;
                     padding: 15px;
+                    
                 }
         
                 .larger-text {
@@ -2832,19 +2835,19 @@ def show_attendance_data():
         
         # Create the HTML content for the team practice column
         html_content_team = '''
-        <div style="background-color: skyblue; border-radius: 5px; padding: 10px;">
+        <div style="background-color: skyblue; border-radius: 5px; padding: 10px; margin-bottom: 20px;">
             <h3 style="text-align: center;">Team Practices</h3>
         '''
 
         # Create the HTML content for the skills practice column
         html_content_skills = '''
-        <div style="background-color: skyblue; border-radius: 5px; padding: 10px;">
+        <div style="background-color: skyblue; border-radius: 5px; padding: 10px; margin-bottom: 20px;">
             <h3 style="text-align: center;">Skills Practices</h3>
         '''
 
         # Create the HTML content for the overall column
         html_content_overall = '''
-        <div style="background-color: skyblue; border-radius: 5px; padding: 10px;">
+        <div style="background-color: skyblue; border-radius: 5px; padding: 10px; margin-bottom: 20px;">
             <h3 style="text-align: center;">Overall</h3>
         '''
 
