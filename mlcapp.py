@@ -7,7 +7,7 @@ from PIL import Image
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from geopy.geocoders import Nominatim
+
 import folium
 from folium import plugins
 from dateutil import parser
