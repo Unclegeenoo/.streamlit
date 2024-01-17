@@ -1,9 +1,9 @@
 matplotlib
-streamlit
 numpy
 pandas
-seaborn
-plotly
-deopy
-forium
-dateutil
+image
+plotly.express
+plotly.graph_objects
+make_subplots
+folium
+parser
