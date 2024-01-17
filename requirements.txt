@@ -4,7 +4,5 @@ pandas
 matplotlib
 plotly==4.14.3
 plotly_express
-plotly==4.14.3
-make_subplots==0.14.1
 folium
 parser
