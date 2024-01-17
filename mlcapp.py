@@ -1769,6 +1769,7 @@ def show_attendance_data():
                     background-color: skyblue;
                     border-radius: 10px;
                     padding: 15px;
+                    margin-bottom: 20px;
                 }
         
                 .larger-text {
@@ -1790,6 +1791,7 @@ def show_attendance_data():
                 border-radius: 10px;
                 padding: 10px;
                 font-weight: bold;
+                margin-bottom: 20px;
             }
             </style>
             """,
