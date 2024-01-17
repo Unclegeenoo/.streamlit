@@ -6,7 +6,10 @@ secondaryBackgroundColor="#f0f2f6"
 [theme]
 base="dark"
 primaryColor="#FF4B4B"
-backgroundColor="#2E2E2E"
-textColor="#CFCFCF"
-secondaryBackgroundColor="#1C1C1C"
+backgroundColor="#FFFFFF"
+textColor="#31333F"
+secondaryBackgroundColor="F0F2F6"
+
+
+
 
