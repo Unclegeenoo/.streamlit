@@ -1,10 +1,10 @@
 streamlit
-plotly==4.14.3
 numpy
 pandas
-image
-plotly.express
-plotly.graph_objects
+matplotlib
+plotly==4.14.3
+plotly_express
+plotly==4.14.3
 make_subplots
 folium
 parser
