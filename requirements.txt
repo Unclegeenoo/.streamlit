@@ -5,4 +5,4 @@ matplotlib
 plotly==4.14.3
 plotly_express
 folium
-parser
+
