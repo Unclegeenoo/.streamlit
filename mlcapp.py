@@ -250,85 +250,86 @@ def show_general_stats():
         unsafe_allow_html=True,
     )
 
+    container = st.container(border=True)  
+    with container:
+        # Create the layout for the dashboard
+        col1, col2, col3, col4 = st.columns(4)
 
-    # Create the layout for the dashboard
-    col1, col2, col3, col4 = st.columns(4)
+        # First row
+        with col1:
+            # Display unique location counts
+            st.markdown(
+                f"<div class='dashboard-column'>Unique Locations<br><span class='larger-text'>{unique_location_count}</span></div>",
+                unsafe_allow_html=True
+            )
 
-    # First row
-    with col1:
-        # Display unique location counts
-        st.markdown(
-            f"<div class='dashboard-column'>Unique Locations<br><span class='larger-text'>{unique_location_count}</span></div>",
-            unsafe_allow_html=True
-        )
+        with col2:
+            # Display average events per week cumulative
+            st.markdown(
+                f"<div class='dashboard-column'>Avg Events/Year<br><span class='larger-text'>{average_events_per_year['Total Events']:.2f}</span></div>",
+                unsafe_allow_html=True
+            )
 
-    with col2:
-        # Display average events per week cumulative
-        st.markdown(
-            f"<div class='dashboard-column'>Avg Events/Year<br><span class='larger-text'>{average_events_per_year['Total Events']:.2f}</span></div>",
-            unsafe_allow_html=True
-        )
+        with col3:
+            # Display average events per year cumulative
+            st.markdown(
+                f"<div class='dashboard-column'>Avg Events/Week<br><span class='larger-text'>{average_events_per_year['Events per Week']:.2f}</span></div>",
+                unsafe_allow_html=True
+            )
 
-    with col3:
-        # Display average events per year cumulative
-        st.markdown(
-            f"<div class='dashboard-column'>Avg Events/Week<br><span class='larger-text'>{average_events_per_year['Events per Week']:.2f}</span></div>",
-            unsafe_allow_html=True
-        )
+        with col4:
+            # Display total hours (total_duration)
+            st.markdown(
+                f"<div class='dashboard-column'>Total Event Hours<br><span class='larger-text'>{total_hours}</span></div>",
+                unsafe_allow_html=True
+            )
 
-    with col4:
-        # Display total hours (total_duration)
-        st.markdown(
-            f"<div class='dashboard-column'>Total Event Hours<br><span class='larger-text'>{total_hours}</span></div>",
-            unsafe_allow_html=True
-        )
 
+
+        
+
+        ##filler for spacing
+        st.markdown("<br>", unsafe_allow_html=True)
 
 
     
+        bg_color = 'skyblue'
 
-    ##filler for spacing
-    st.markdown("<br>", unsafe_allow_html=True)
+        # Create the layout for the dashboard
+        col5, col6, col7 = st.columns(3)
 
+        # Second row
+        with col5:
+            # Display the number of completed events
+            st.markdown(
+                f"<div class='dashboard-column' style='text-align: center; background-color: {bg_color};'>Completed Events<br><span class='larger-text'>{status_counts.get('Completed', 0)}</span></div>",
+                unsafe_allow_html=True
+            )
 
-   
-    bg_color = 'skyblue'
+        with col6:
+            # Display the number of cancelled events
+            st.markdown(
+                f"<div class='dashboard-column' style='text-align: center; background-color: {bg_color};'>Cancelled Events<br><span class='larger-text'>{status_counts.get('Cancelled', 0)}</span></div>",
+                unsafe_allow_html=True
+            )
 
-    # Create the layout for the dashboard
-    col5, col6, col7 = st.columns(3)
-
-    # Second row
-    with col5:
-        # Display the number of completed events
-        st.markdown(
-            f"<div class='dashboard-column' style='text-align: center; background-color: {bg_color};'>Completed Events<br><span class='larger-text'>{status_counts.get('Completed', 0)}</span></div>",
-            unsafe_allow_html=True
-        )
-
-    with col6:
-        # Display the number of cancelled events
-        st.markdown(
-            f"<div class='dashboard-column' style='text-align: center; background-color: {bg_color};'>Cancelled Events<br><span class='larger-text'>{status_counts.get('Cancelled', 0)}</span></div>",
-            unsafe_allow_html=True
-        )
-
-    with col7:
-        # Display the percentage of completed events
-        completed_percent = (status_counts.get('Completed', 0) / len(df_att)) * 100
-        st.markdown(
-            f"<div class='dashboard-column' style='text-align: center; background-color: {bg_color};'>Completed Percentage<br><span class='larger-text'>{completed_percent:.2f}%</span></div>",
-            unsafe_allow_html=True
-        )
+        with col7:
+            # Display the percentage of completed events
+            completed_percent = (status_counts.get('Completed', 0) / len(df_att)) * 100
+            st.markdown(
+                f"<div class='dashboard-column' style='text-align: center; background-color: {bg_color};'>Completed Percentage<br><span class='larger-text'>{completed_percent:.2f}%</span></div>",
+                unsafe_allow_html=True
+            )
 
     
     ###################################################################################
  
     ##filler for spacing
-    st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)
 
     #############################################################
 
-    st.markdown("<p style='text-align: center;'>Practices were conducted from 2010 to 2022, but were recorded only starting at the end of 2013. </p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center;'>Practices were conducted from 2010 to 2022, but were recorded only starting at the end of 2013. </p>", unsafe_allow_html=True)
     
     
       
@@ -1537,8 +1538,7 @@ def show_financial_analysis():
 
                 st.plotly_chart(fig_equip_rub, use_container_width=True)
             
-            container = st.container(border=True)  
-            with container: 
+            with st.expander('Top Profit for RUB Operations'): 
 
                 st.plotly_chart(fig_op_profit_rub, use_container_width=True)
                 st.markdown("""
@@ -1550,8 +1550,7 @@ def show_financial_analysis():
                     </p>
                 """, unsafe_allow_html=True)
 
-            container = st.container(border=True)  
-            with container:
+            with st.expander('Top Equipment Operations by Revenue (RUB)'):
 
                 st.plotly_chart(fig_op_revenue_rub, use_container_width=True)
                 st.markdown("""
@@ -1693,8 +1692,7 @@ def show_financial_analysis():
         
                 st.plotly_chart(fig_equip_usd, use_container_width=True)
 
-            container = st.container(border=True)  
-            with container:
+            with st.expander('Top Profit for USD Operations'):
 
                 st.plotly_chart(fig_op_profit_usd, use_container_width=True)
                 st.markdown("""
@@ -1707,7 +1705,7 @@ def show_financial_analysis():
             
             
 
-            container = st.container(border=True)  
+             
             container.markdown("""
                 <style>
                     .st-geAtf {
@@ -1718,7 +1716,7 @@ def show_financial_analysis():
             """, unsafe_allow_html=True)
 
 
-            with container:
+            with st.expander('Top Equipment Operations by Revenue (USD)'):
 
                 st.plotly_chart(fig_op_revenue_usd, use_container_width=True)
                 st.markdown("""
