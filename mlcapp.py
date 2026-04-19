@@ -1011,7 +1011,7 @@ def show_financial_analysis():
 
 
             # Filter rows without "(Liquidation)" in the Commentary column
-            df_filtered_rub = df_fin_rub.loc[~df_fin_rub['Commentary'].str.contains('(Liquidation)', na=False), :].copy()
+            df_filtered_rub = df_fin_rub.loc[~df_fin_rub['Commentary'].str.contains('(Liquidation)', na=False, regex=False), :].copy()
             # Extract the year from the 'Date' column  
             df_filtered_rub['Year'] = df_filtered_rub['Date'].dt.year
 
@@ -1211,7 +1211,7 @@ def show_financial_analysis():
 
 
 
-            df_filtered_usd = df_fin_usd.loc[~df_fin_usd['Commentary'].str.contains('(Liquidation)', na=False), :].copy()
+            df_filtered_usd = df_fin_usd.loc[~df_fin_usd['Commentary'].str.contains('(Liquidation)', na=False, regex=False), :].copy()
             # Extract the year from the 'Date' column
             df_filtered_usd['Year'] = df_filtered_usd['Date'].dt.year
 
@@ -2337,160 +2337,6 @@ def show_attendance_data():
 
 
 
-            with col2:
-                st.write("<h3 style='text-align: center;'></h3>", unsafe_allow_html=True)
-
-                fig_skills = go.Figure()
-                fig_skills.add_trace(go.Bar(
-                    x=total_attendance_skills_practices.index,
-                    y=total_attendance_skills_practices.values,
-                    marker=dict(color='skyblue'),  # Set the bar color here
-                    text=total_attendance_skills_practices.values,
-                    textposition='inside',
-                    textfont=dict(size=16, color='black'),
-                    name='Total Attendance'
-                ))
-
-                fig_skills.add_trace(go.Scatter(
-                    x=average_attendance_skills_practice_per_year.index,
-                    y=average_attendance_skills_practice_per_year.values,
-                    mode='lines+markers+text',
-                    name='Avg Attendance per Event',
-                    marker=dict(color='rgba(255, 0, 0, 0.7)', size=10),
-                    text=rounded_average_attendance_skills_practice.values,
-                    textposition='top center',
-                    textfont=dict(size=16, color='red'),
-                    yaxis='y2'
-                ))
-
-                fig_skills.update_layout(
-                    xaxis=dict(title='Year'),
-                    yaxis=dict(showgrid=False, range=[0, 300], showticklabels=False, showline=False),
-                    yaxis2=dict(overlaying='y', side='right', showgrid=False, range=[0, 10], showticklabels=False, showline=False),
-                    legend=dict(x=0.3, y=.99, traceorder='normal', orientation='h'),
-                )
-
-
-                # Set the x-axis to start from 2013
-                fig_skills.update_xaxes(range=[2013, 2022])
-
-
-                
-
-
-
-
-            # Create the layout for the dashboard row 2
-            col1, col2, = st.columns(2)
-
-            # Filter data for 'Championship' and 'Intra-Squad Game'
-            championship_events = completed_events[completed_events['Type'] == 'Championship']
-            intra_squad_game_events = completed_events[completed_events['Type'] == 'Intra-Squad Game']
-
-            # Compute total attendance for 'Championship' and 'Intra-Squad Game' per year
-            total_attendance_championship = championship_events.groupby('Year')['Attendance'].sum()
-            total_attendance_intra_squad_game = intra_squad_game_events.groupby('Year')['Attendance'].sum()
-
-            # Compute average attendance per event per year for 'Championship' and 'Intra-Squad Game'
-            average_attendance_championship_per_year = championship_events.groupby('Year')['Attendance'].mean()
-            average_attendance_intra_squad_game_per_year = intra_squad_game_events.groupby('Year')['Attendance'].mean()
-
-            
-            # Round average attendance for Championship per year to tenths
-            average_attendance_championship_per_year = average_attendance_championship_per_year.round(1)
-
-            # Round average attendance for Intra-Squad Game per year to tenths
-            average_attendance_intra_squad_game_per_year = average_attendance_intra_squad_game_per_year.round(1)
-
-            
-            ################## chart 4 data (2nd chart in 2nd row) ######################
-
-            # Filter the DataFrame for 'Tournament' events
-            tournament_events = df_att[df_att['Type'] == 'Tournament']
-
-            # Compute total attendance per year for Tournament events
-            total_attendance_per_year_tournament = tournament_events.groupby('Year')['Attendance'].sum()
-            
-
-            # Filter the DataFrame for 'Intra-Squad Game' events
-            intra_squad_events = df_att[df_att['Type'] == 'Intra-Squad Game']
-
-            # Compute total attendance per year for Intra-Squad Game events
-            total_attendance_per_year_intra_squad_game = intra_squad_events.groupby('Year')['Attendance'].sum()
-
-            # Concatenate the two dataframes
-            combined_events = pd.concat([intra_squad_events, tournament_events])
-
-            # Concatenate the two dataframes
-            average_combined = combined_events.groupby('Year')['Attendance'].mean()
-
-
-
-            #############################################################
-
-
-
-
-            # second row
-            with col1:
-                st.write("<h3 style='text-align: center;'></h3>", unsafe_allow_html=True)
-                fig_championship = go.Figure()
-
-                # Add bar chart for total attendance
-                fig_championship.add_trace(go.Bar(
-                    x=total_attendance_championship.index,
-                    y=total_attendance_championship.values,
-                    marker=dict(color='skyblue'),
-                    text=total_attendance_championship.values,
-                    textposition='inside',
-                    textfont=dict(size=16, color='black'),
-                    name='Championship Attendance'
-                ))
-
-                # Add line chart for average attendance per event per year
-                fig_championship.add_trace(go.Scatter(
-                    x=average_attendance_championship_per_year.index,
-                    y=average_attendance_championship_per_year.values,
-                    mode='lines+markers+text',
-                    name='Avg Attendance per Event',
-                    marker=dict(color='rgba(255, 0, 0, 0.7)', size=10),
-                    text=average_attendance_championship_per_year.values,
-                    textposition='top center',
-                    textfont=dict(size=16, color='red'),
-                    yaxis='y2'
-                ))
-
-                fig_championship.update_layout(
-                    xaxis=dict(title='Year'),
-                    yaxis=dict(showgrid=False, range=[0, 75], showticklabels=False, showline=False),
-                    yaxis2=dict(overlaying='y', side='right', showgrid=False, range=[0, 35], showticklabels=False, showline=False),
-                    legend=dict(x=0.3, y=1, traceorder='normal', orientation='h'),
-                )
-
-                with st.expander('Team Practice Attendance'):
-                    st.plotly_chart(fig_team, width='stretch')
-                    st.markdown("""
-                    <p style='text-align: center;'>
-                        2018 was a busy year outside of practices. There were tournaments, the World Championship in Israel, recovery time after the
-                        Championship, vacations and weather factors limited the amount of times the team could get together in 2018. 
-                    </p>
-                """, unsafe_allow_html=True)
-
-
-
-                with st.expander('Championship Attendance'):
-                    st.plotly_chart(fig_championship, width='stretch')
-                    st.markdown("""
-                            <p style='text-align: center;'>
-                                Championship Attendance was consistently growing over the years. As seen in lower charts, Championships had one of the best average attendance
-                                records for all events.  Everyone loves a Championship.
-                            </p>
-                        """, unsafe_allow_html=True)
-                
-                    
-
-
-            
             with col2:
                 st.write("<h3 style='text-align: center;'></h3>", unsafe_allow_html=True)
 
