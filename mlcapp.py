@@ -2468,7 +2468,7 @@ def show_attendance_data():
                 )
 
                 with st.expander('Team Practice Attendance'):
-                    st.plotly_chart(fig_team, width='stretch')
+                    st.plotly_chart(fig_team, width='stretch', key='attendance_fig_team')
                     st.markdown("""
                     <p style='text-align: center;'>
                         2018 was a busy year outside of practices. There were tournaments, the World Championship in Israel, recovery time after the
@@ -2479,7 +2479,7 @@ def show_attendance_data():
 
 
                 with st.expander('Championship Attendance'):
-                    st.plotly_chart(fig_championship, width='stretch')
+                    st.plotly_chart(fig_championship, width='stretch', key='attendance_fig_championship')
                     st.markdown("""
                             <p style='text-align: center;'>
                                 Championship Attendance was consistently growing over the years. As seen in lower charts, Championships had one of the best average attendance
@@ -2542,7 +2542,7 @@ def show_attendance_data():
 
 
                 with st.expander('Skills Practice Attendance'):  
-                    st.plotly_chart(fig_skills, width='stretch')
+                    st.plotly_chart(fig_skills, width='stretch', key='attendance_fig_skills')
                     st.markdown("""
                             <p style='text-align: center;'>
                                 At the end of 2016, one of the founders holding practices moved to a different district in Moscow.
@@ -2554,7 +2554,7 @@ def show_attendance_data():
 
 
                 with st.expander('Intra-Squad Game and Tournament Attendance'):
-                    st.plotly_chart(fig_intra_tour, width='stretch')
+                    st.plotly_chart(fig_intra_tour, width='stretch', key='attendance_fig_intra_tour')
                     st.markdown("""
                             <p style='text-align: center;'>
                                 Intra-Squad Games were created to compensate for Tournaments (mostly abroad) that were no longer attendable due to sanctions, 
